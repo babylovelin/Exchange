@@ -1,0 +1,177 @@
+<template lang="html">
+  <div class="recharge">
+    <m-header></m-header>
+    <div class="recharge-firstline">
+      <p class="title">充币</p>
+    </div>
+    <div class="recharge-sndline">
+        <span class="bz" @click="showselect">BTC<x-icon class="jian" type="ios-arrow-down" size="35"></x-icon>
+        </span>
+    </div>
+    <div class="recharge-thirline">
+      <qrcode :value="123" :fg-color="fgColor" style="width:'100px'"></qrcode>
+    </div>
+    <div class="recharge-fourline">
+      <p>ewrfafaefefafawfaw</p>
+    </div>
+    <div class="recharge-fiveline">
+      <span class="copy">复制地址</span>
+      <span class="save">保存二维码</span>
+    </div>
+    <div class="recharge-sixline">
+      <p>转入说明</p>
+      <p>1.转入是自动的，货币转账需要需要整个网络进行确认，达到6个确认后您的货币会自动充值到您的账户</p>
+      <p>2.此地址是您唯一且独自使用的转入地址，你可以同时进行多次充值，也可将此地址XXXX</p>
+      <p>3.请仔细确认该地址币种，任何其他币种充值到该地址将无法找回。</p>
+    </div>
+    <div class="model" id="model-sel">
+      <ul>
+        <li class="vux-1px-b qbxz" @click="hidesel">选择币种</li>
+        <li class="vux-1px-b">BTC</li>
+        <li class="vux-1px-b">LTC</li>
+        <li class="vux-1px-b">BCC</li>
+        <li class="vux-1px-b">TCA</li>
+        <li class="vux-1px-b">TCA</li>
+      </ul>
+    </div>
+  </div>
+</template>
+
+<script>
+import {Qrcode } from 'vux'
+import MHeader from './m-header/m-header'
+export default {
+  components: {
+    MHeader,
+    Qrcode
+  },
+  data() {
+    return {
+      hide:true,
+      modelshow:true
+    }
+  },
+  methods: {
+    showselect: function(){
+      if(this.modelshow){
+        this.modelshow=!this.modelshow;
+        document.getElementById('model-sel').style.top='50vh';
+        document.getElementById('model-sel').style.display='block';
+        return;
+      }
+      if(!this.modelshow){
+        document.getElementById('model-sel').style.top='100vh';
+        document.getElementById('model-sel').style.display='none';
+        this.modelshow=!this.modelshow;
+        return;
+      }
+    },
+    hidesel: function(){
+      document.getElementById('model-sel').style.top='100vh';
+      document.getElementById('model-sel').style.display='none';
+      this.modelshow=!this.modelshow;
+    }
+  }
+}
+</script>
+
+<style lang="less">
+@import '~vux/src/styles/reset.less';
+@import '~vux/src/styles/1px.less';
+@import '~vux/src/styles/tap.less';
+@import '~common/less/variable.less';
+  .recharge {
+    position: absolute;
+    .left(0);
+    .top(0);
+    background: #1D232E;
+    height: 100vh;
+    width: 100%;
+    color: @font-gray;
+    text-align: center;
+    .recharge-firstline {
+      .fs(18);
+      .h(20);
+      position: relative;
+      .title {
+        position: absolute;
+        .top(5);
+        .left(170)
+      }
+    }
+    .recharge-sndline {
+      .m-t(10);
+      .fs(28);
+      color: red;
+      .bz {
+        position: relative;
+        .jian {
+          position: absolute;
+          .left(50);
+          .top(0);
+        }
+      }
+    }
+    .recharge-thirline {
+      .m-t(10);
+    }
+    .recharge-fourline {
+      .fs(14);
+      .p-b(5);
+    }
+    .recharge-fiveline {
+      span{
+        display: block;
+        width: 95%;
+        margin: 0 auto;
+        .h(40);
+        background-color: @bg-button;
+        border-radius: 3px;
+        .m-b(8);
+        .fs(20);
+        .l-h(40);
+        color: @font-white;
+      }
+    }
+    .recharge-sixline {
+      .fs(12);
+      width: 96%;
+      margin: 0 auto;
+      text-align: left;
+    }
+    .model {
+      display: none;
+      height: 50vh;
+      width: 100%;
+      overflow: scroll;
+      background: rgba(0,0,0,0.9);
+      position: absolute;
+      top:100vh;
+      left: 0;
+      .fs(15);
+      ul {
+        li {
+          .padding(10);
+
+        }
+        .qbxz {
+          .fs(18);
+          font-weight: bold;
+          background: rgb(23,30,43);
+        }
+        li:hover {
+          background: @bg-button;
+        }
+      }
+    }
+  }
+.vux-x-icon {
+  fill: #fff;
+}
+.hide {
+  display: none;
+}
+.dis {
+  display: block;
+}
+</style>

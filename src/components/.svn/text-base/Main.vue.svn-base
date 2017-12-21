@@ -1,0 +1,93 @@
+<template>
+  <div style="height:100%;" class="h">
+        <m-header  >
+        </m-header>
+        <m-tab :tabdata='tabs'>
+        </m-tab>
+        <div class="main_banner">
+          <swiper :list="baseList" auto loop :show-dots='false' :aspect-ratio='120/375'></swiper>
+        </div>
+        <div class="fixed_contain">
+        <!--   <m-list></m-list> -->
+        <img src="../common/image/ppt.png" alt="">
+        </div>
+    <!--      <m-bottom class="bottom"></m-bottom> -->
+  </div>
+
+</template>
+
+<script>
+import {Drawer, ViewBox, Swiper, Tabbar} from 'vux'
+import MHeader from './m-header/m-header'
+import MTab from './m-tab/m-tab'
+import MList from './m-list/m-list'
+import MBottom from './m-bottom/m-bottom'
+const baseList = [{
+  // url: '/regactive',
+  img: 'http://www.h5edu.cn/banner.png'
+}]
+export default {
+  data() {
+    return {
+      baseList: baseList,
+      tabs: [{tag: 'BTC', link: '/main'},
+             {tag: 'ETH', link: '/main'},
+             {tag: 'TCH', link: '/main'},
+             {tag: 'USDT', link: '/main'}
+      ]
+    }
+  },
+  methods: {
+  },
+  computed: {
+    // drawer: {
+    //   get: function () {
+    //     return this.$store.state.drawer
+    //   },
+    //   set: function (newValue) {
+    //     this.$store.state.drawer = newValue
+    //   }
+    // }
+  },
+  components: {
+    Drawer,
+    ViewBox,
+    MHeader,
+    MBottom,
+    MTab,
+    Swiper,
+    MList,
+    Tabbar
+  }
+}
+</script>
+
+<style lang="less">
+@import '~vux/src/styles/reset.less';
+@import '~vux/src/styles/1px.less';
+@import '~vux/src/styles/tap.less';
+ @import '~common/less/variable.less';
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  background:@bg-body;
+
+}
+.fixed_contain{
+  /* border: 1px solid red; */
+  position: absolute;
+  .top(210);
+  .bottom(10);
+  overflow: scroll;
+  img{
+    width: 100%;
+  }
+}
+.bottom{
+  position: fixed;
+  bottom: 0px;
+  z-index: 101;
+}
+
+</style>

@@ -1,0 +1,378 @@
+<template lang="html">
+  <div class="reg_contain">
+      <m-header>  </m-header>
+      <div class="input_contain">
+        <p>密码找回</p>
+<!--         <div class="input">
+  <span>邮箱</span>
+  <input type="text" v-model='regInfo.mail'
+  v-verify="regInfo.mail"
+  placeholder="输入邮箱" >
+  <label v-remind="mail"></label>
+</div> -->
+<!--         <div class="input">
+  <span>邮箱验证码</span>
+  <input type="text" v-model='regInfo.mailcode'
+  v-verify="regInfo.mailcode"
+  placeholder="输入邮箱验证码">
+  <label v-remind="regInfo.mailcode"></label>
+  <button class="get" v-on:click='getMailCode()' v-bind:disabled="mailDisable">
+    {{mailtime}}
+  </button>
+</div> -->
+        <div class="input inputphone">
+          <select class="" v-model='regInfo.prefix'>
+             <option  v-bind:value='item.prefix' v-for='item in prefixdatas' >{{item.name}}</option>
+          </select>
+          <input type="text" v-model='regInfo.phone'
+          v-verify='regInfo.phone'
+          placeholder="输入手机号" autofocus>
+        </div>
+        <div class="input">
+          <span>手机验证码</span>
+          <input type="text" v-model='regInfo.phonecode'
+          v-verify='regInfo.phonecode'
+          placeholder="输入验证码">
+          <button class="get" v-on:click='getPhoneCode()' v-bind:disabled="phoneDisable">
+            {{phonetime}}
+          </button>
+        </div>
+        <div class="input">
+          <span>输入密码</span>
+          <input type="password" v-model='regInfo.pass'
+          v-verify='regInfo.pass'
+          placeholder="输入密码">
+        </div>
+        <div class="input">
+          <span>确认密码</span>
+          <input type="text" v-model='regInfo.wx'
+          v-verify='regInfo.wx'
+          placeholder="输入微信号">
+        </div>
+<!--         <div class="input">
+  <span>推荐人(可选)</span>
+  <input type="text" v-model='regInfo.recommend'
+  v-verify='regInfo.recommend'
+  placeholder="输入推荐人手机号码"
+  >
+</div> -->
+        <div class="desc">
+          密码必须由8~20个字符组成，必须包含数字，大写字母，和小写字母，
+          不能包含特殊字符和空格
+          <br>
+          <br>
+          注册即视为同意 <span>&nbsp;&nbsp;用户协议</span>
+        </div>
+        <div class="btn" v-on:click="reg()">
+          完成
+        </div>
+      </div>
+  </div>
+
+</template>
+
+<script>
+import MHeader from './m-header/m-header'
+
+export default {
+  components: {
+    MHeader
+  },
+  data() {
+    return {
+      phonetime: '点击获取',
+      mailtime: '点击获取',
+      phoneDisable: false,
+      mailDisable: false,
+      prefixdatas: [{
+        'name': '中国',
+        'prefix': '86'
+      }, {
+        'name': '扎伊尔',
+        'prefix': '243'
+      }],
+      regInfo: {
+        mail: '',
+        mailcode: '',
+        phone: '',
+        phonecode: '',
+        wx: '',
+        pass: '',
+        recommend: '',
+        prefix: '86'
+      }
+    }
+  },
+  verify: {
+    regInfo: {
+      // mail: ['email', 'required'],
+      // mailcode: 'required',
+      phone: ['mobile', 'required'],
+      phonecode: 'required',
+      pass: 'required'
+    }
+  },
+  methods: {
+    getMailCode: function() {
+      // if (this.$verify.$errors.regInfo.mail.length > 0) {
+      //   alert('请输入正确邮箱格式')
+      // } else {
+      //   // 点击请求
+      //   var params = new URLSearchParams()
+      //   params.append('language', this.$store.state.language)
+      //   params.append('email', this.regInfo.mail)
+      //   this.$http.post('Common/get_email_code', params).then((res) => {
+      //     console.log(res)
+      //     // 倒计时处理
+      //     alert(res.data.message)
+      //     if (res.data.status) {
+      //       let time = 60
+      //       var that = this
+      //       this.mailDisable = true
+      //       let test = setInterval(function() {
+      //         time--
+      //         if (time > 0) {
+      //           that.mailtime = time + 's'
+      //         } else {
+      //           that.mailDisable = false
+      //           that.mailtime = '点击获取'
+      //           clearInterval(test)
+      //         }
+      //       }, 1000)
+      //     }
+      //   }, (res) => {
+      //     alert('发送失败,请检查邮箱是否正确')
+      //   })
+      // }
+    },
+    getPhoneCode: function() {
+      if (this.$verify.$errors.regInfo.phone.length > 0) {
+        alert('请输入正确手机号码')
+      } else {
+        var params = new URLSearchParams()
+        // params.append('language', this.$store.state.language)
+        params.append('mobile', this.regInfo.phone)
+        params.append('prefix', this.regInfo.prefix)
+        // var params = {
+        //   mobile: this.regInfo.phone,
+        //   prefix: this.regInfo.prefix
+        // }JSON.stringify(params)
+        this.$http.post('v1/getcode', params).then((res) => {
+          console.log(res)
+
+          if (res.data.err === 0) {
+            let time = 60
+            var that = this
+            this.phoneDisable = true
+            var test = setInterval(function() {
+              time--
+              if (time > 0) {
+                that.phonetime = time + 's'
+              } else {
+                that.phoneDisable = false
+                that.phonetime = '点击获取'
+                clearInterval(test)
+              }
+            }, 1000)
+          }
+        }, (res) => {
+          // alert('发送失败,请检查是否正确')
+        })
+      }
+    },
+    reg: function() {
+      // var that = this
+      if (this.$verify.check()) {
+        //
+        // var params = new URLSearchParams()
+        // params.append('language', this.$store.state.language)
+        // params.append('mobile', this.regInfo.phone)
+        // params.append('mobile_prefix', this.regInfo.prefix)
+        // params.append('mobile_code', this.regInfo.phonecode)
+        // params.append('email', this.regInfo.mail)
+        // params.append('email_code', this.regInfo.mailcode)
+        // this.$http.post('Register/validate_email_mobile', params).then((res) => {
+        //   console.log(res)
+        //   if (res.data.status) {
+        //     var params = new URLSearchParams()
+        //     params.append('language', this.$store.state.language)
+        //     params.append('email', this.regInfo.mail)
+        //     params.append('wechat', this.regInfo.wx)
+        //     params.append('password', this.regInfo.pass)
+        //     params.append('mobile', this.regInfo.phone)
+        //     params.append('recommend', this.regInfo.recommend)
+        //     this.$http.post('Register/index', params).then((res) => {
+        //       console.log(res)
+        //       if (res.data.status) {
+        //         // 设置uid 票据
+        //         that.$store.state.userInfo.uId = res.data.userid
+        //         that.$store.state.userInfo.token = res.data.token
+        //         // 成功跳转
+        //         this.$router.push('/RegOk')
+        //       } else {
+        //         alert(res.data.message)
+        //       }
+        //     }, (res) => {
+        //
+        //     })
+        //   } else {
+        //     alert(res.data.message)
+        //   }
+        // }, (res) => {
+        //   alert(res.data.message)
+        // })
+        // 注册请求
+        var that = this
+        var params = new URLSearchParams()
+        // params.append('language', this.$store.state.language)
+        params.append('mobile', this.regInfo.phone)
+        params.append('wechat', this.regInfo.wx)
+        params.append('pass', this.regInfo.pass)
+        params.append('code', this.regInfo.phonecode)
+        params.append('recommender', this.regInfo.recommend)
+        this.$http.post('v1/newuser ', params).then((res) => {
+          console.log(res)
+          if (res.data.err === 0) {
+            // 设置uid 票据
+            that.$store.state.userInfo.uId = that.regInfo.phone
+             // that.$store.state.userInfo.token = res.data.token
+            // 成功跳转
+            this.$router.push('/RegOk')
+          } else {
+            alert(res.data.msg)
+          }
+        }, (res) => {
+
+        })
+        console.log(this.regInfo)
+      } else {
+        alert('格式错误,请重新输入')
+      }
+    }
+  }
+}
+</script>
+
+<style lang="less">
+@import '../common/less/variable.less';
+.reg_contain{
+  position: relative;
+  background: @bg-body;
+  .w(375);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  .input_contain{
+    overflow: scroll;
+    flex-flow: 1;
+    .w(355);
+    margin:  0px auto;
+    p{
+      .h(65);
+      color: #fff;
+      text-align: center;
+      .l-h(65);
+      .fs(22);
+      font-weight: 200;
+
+    }
+    .input{
+      /* .border(red) */;
+      position: relative;
+      .m-b(10);
+      .h(45);
+      .fs(16);
+      border-radius: 5px;
+      background: #fff;
+      /* border: 1px solid red; */
+      span{
+        .w(75);
+        display: block;
+        float: left;
+        .h(45);
+        text-align: left;
+        .l-h(45);
+        .fs(12);
+        .p-l(5);
+      }
+
+      input{
+        color: gray;
+        .fs(12);
+        display: block;
+        height: 100%;
+        float: left;
+        border: 0;
+        outline: 0;
+      }
+      input::-webkit-input-placeholder {
+          color:rgb(224,224,224);
+      }
+      .get{
+        .w(70);
+        .h(35);
+        position: absolute;
+        border-radius:5px;
+        background: #c2c5c9;
+        color: #fff;
+        .fs(12);
+        font-weight: 100;
+        text-align: center;
+        .l-h(35);
+        .top(5);
+        .right(10);
+        border: 0;
+        outline: 0;
+      }
+    }
+    .inputphone{
+      .w(355);
+      background: rgba(255,255,255,0);
+      select{
+        background: #fff;
+        /* .w(45); */
+        .h(45);
+        .border(green);
+        text-align: center;
+        outline: 0;
+        border: 0;
+        position: absolute;
+        border-radius:5px;
+        .top(0);
+        .left(0);
+      }
+      input{
+        .w(295);
+        .p-l(15);
+        border-radius:5px;
+        position: absolute;
+        .top(0);
+        .right(0);
+      }
+    }
+    .desc{
+      .p-l(10);
+      .p-t(20);
+      .fs(14);
+      color:@font-gray;
+      font-weight: 100;
+      .l-h(19);
+      span{
+        color: rgb(61,103,145);
+      }
+    }
+    .btn{
+      .w(355);
+      text-align: center;
+      color: #fff;
+      background:@btn-login;
+      .h(54);
+      .l-h(54);
+      font-weight: 200;
+      .fs(26);
+      border-radius:5px;
+      .m-t(15);
+    }
+  }
+}
+</style>

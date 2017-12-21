@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width,initial-scale=1.0,maximum-scale=1,minimum-scale=1,user-scalable=no'>
+  <meta name='screen-orientation' content='portrait'>
+  <title>9158交易所</title>
+  <style>
+    #portrait {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 9999;
+      background: rgb(31, 35, 47);
+      text-align: center;
+      color: #9095AC;
+      font-size: 27px;
+      display: none;
+    }
+
+    @media screen and (orientation: portrait) {
+      #portrait {
+        display: none;
+      }
+    }
+
+    @media screen and (orientation: landscape) and (min-width: 500px) {
+      #portrait {
+        display: block;
+
+      }
+    }
+
+    #portrait p {
+      height: 150vh;
+      line-height: 100vh;
+    }
+  </style>
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement('script');
+      hm.src = 'https://hm.baidu.com/hm.js?33b5f0911c736c14e54f2c409a0d6f3d';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+</head>
+
+<body>
+  <div id='app'></div>
+  <div id='portrait'>
+    <p>请使用竖屏观看</p>
+  </div>
+  <!-- built files will be auto injected -->
+  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+  <script type='text/javascript'>
+    document.getElementsByTagName('html')[0].style.fontSize = window.screen.width / 10 + 'px';
+    document.documentElement.addEventListener('touchstart', function(event) {
+      if (event.touches.length > 1) {
+        event.preventDefault();
+      }
+    }, false);
+    // alert(document.documentElement.clientWidth+":"+  document.documentElement.clientHeight)
+    // window.onresize = function(){
+    // alert(document.documentElement.clientWidth+":"+  document.documentElement.clientHeight)
+    //
+    // }
+  </script>
+</body>
+
+</html>

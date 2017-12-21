@@ -1,0 +1,131 @@
+<template lang="html">
+  <div class="regok_contain">
+      <m-header class="top"></m-header>
+      <div class="contain">
+          <div class="icon">
+            <div class="icon_img">
+              <!-- <x-icon type="ios-checkmark-outline" size="45"></x-icon> -->
+              <img src="../common/image/test.png" alt="">
+            </div>
+            <p>恭喜你注册成功</p>
+          </div>
+          <div class="user">
+              <!-- ID:{{userId}}<br> -->
+              <!-- 您是第{{userId}}名注册用户<br> -->
+              你可以最多邀请10名好友注册时填写你的手机号,<br>
+              这样你可以获得3枚Tcash/人的奖励.
+          </div>
+          <div class="info">
+              请等待12月12日开启Tcash认购<br>
+              扫描下方二维码,添加客服微信-获取最新资源<br>
+              更有神秘大奖等你加入呦
+          </div>
+          <div class="img">
+              <img src="../common/image/qr_code.png" alt="">
+          </div>
+
+          <div class="btn_contain">
+            <div class="btn" @click="goMain()">确定</div>
+          </div>
+      </div>
+  </div>
+</template>
+
+<script>
+import MHeader from './m-header/m-header'
+export default {
+  data() {
+    return {
+    }
+  },
+  computed: {
+    userId: {
+      get: function () {
+        return this.$store.state.userInfo.uId
+      },
+      set: function (newValue) {
+        this.$store.state.userInfo.uId = newValue
+      }
+    }
+  },
+  methods: {
+    goMain: function() {
+      this.$router.push('/main')
+    }
+  },
+  components: {
+    MHeader
+  }
+}
+</script>
+
+<style lang="less">
+@import '../common/less/variable.less';
+
+.vux-x-icon {
+  fill: #fff;
+}
+
+.regok_contain{
+  display: flex;
+  flex-direction: column;
+  background: @bg-body;
+  height: 100%;
+  .contain{
+    height: 100%;
+    position: relative;
+  /*   .border(pink); */
+    flex-grow: 1;
+    text-align:center;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-around;
+    .icon_img{
+      /* border: 1px solid red; */
+      text-align: center;
+      .h(45);
+      img{
+        .w(45);
+        .h(45);
+      }
+    }
+    .img{
+        img{
+          .w(175);
+        }
+        height: 35%;
+    }
+    .icon{
+      .fs(18);
+      color: #fff;
+      height: 10%;
+    }
+    .user{
+      .fs(14);
+      color: @font-reginfo;
+      height: 10%;
+    }
+    .info{
+      .fs(15);
+      color: #fff;
+      height: 10%;
+    }
+    .btn_contain{
+      height: 10%;
+      .btn{
+        position: absolute;
+        .bottom(35);
+        .left(35);
+        .w(305);
+        .h(40);
+        color:@font-login;
+        text-align: center;
+        background: @btn-login;
+        .fs(16);
+        .l-h(40);
+        border-radius: 5px;
+      }
+    }
+  }
+}
+</style>

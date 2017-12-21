@@ -1,0 +1,63 @@
+<template lang="html">
+  <div class="tab-contain">
+    <ul class="move">
+      <li v-for="item in tabs"
+      v-bind:class="item.tag==tab_default ? 'active' : '' "
+      v-on:click='sel(item.tag,item.link)'
+      >
+      {{item.tag}}
+      </li>
+    </ul>
+  </div>
+
+</template>
+
+<script>
+export default {
+  methods: {
+    sel: function(tag, link) {
+      this.tab_default = tag
+      this.$router.push(link)
+    }
+  },
+  data() {
+    return {
+      tabs: this.tabdata,
+      tab_default: this.tabdata[0]['tag']
+    }
+  },
+  props: ['tabdata']
+}
+</script>
+
+<style lang="less">
+@import '~common/less/variable.less';
+.tab-contain{
+  .w(375);
+  .h(45);
+  .fs(0);
+  overflow: hidden;
+  background:@bg-body;
+  border-bottom: 1px solid @border-gray;
+  ul{
+    .h(45);
+    li{
+    /*   .border(red); */
+      .h(45);
+      display: inline-block;
+      width:25%;
+      .l-h(45);
+      .fs(15);
+      font-weight: 200;
+      text-align: center;
+      color: gray;
+    }
+    .active{
+      color: #fff;
+    }
+  }
+}
+.move{
+   /* transform:translate(-100px,0); */
+}
+</style>

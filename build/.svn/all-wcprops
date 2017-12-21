@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 30
+/svn/exchange/!svn/ver/1/build
+END
+vue-loader.conf.js
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/exchange/!svn/ver/1/build/vue-loader.conf.js
+END
+logo.png
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/exchange/!svn/ver/1/build/logo.png
+END
+webpack.base.conf.js
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/exchange/!svn/ver/1/build/webpack.base.conf.js
+END
+webpack.dev.conf.js
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/exchange/!svn/ver/1/build/webpack.dev.conf.js
+END
+build.js
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/exchange/!svn/ver/1/build/build.js
+END
+utils.js
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/exchange/!svn/ver/1/build/utils.js
+END
+check-versions.js
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/exchange/!svn/ver/1/build/check-versions.js
+END
+webpack.prod.conf.js
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/exchange/!svn/ver/1/build/webpack.prod.conf.js
+END

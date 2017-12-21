@@ -1,0 +1,114 @@
+<template lang="html">
+  <div class="moneymanageitem">
+    <div class="item-top">
+      <div class="item-div item-left">
+        BTC
+      </div>
+      <div class="item-div item-right">
+        <span class="span1">总资产</span>  <span class="span2">1.0000141</span>
+      </div>
+    </div>
+    <div class="item-bottom">
+      <div class="item-div item-left">
+        <div class="item-div-top">
+          <span class="span1">冻结</span>
+          <span class="span2">1.00000141</span>
+        </div>
+        <div class="item-div-bottom">
+          <span class="span1">可用</span>
+          <span class="span2">1.00000141</span>
+        </div>
+      </div>
+      <div class="item-div item-right">
+        <span class="cb">充币</span>
+        <span class="tb">提币</span>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+}
+</script>
+
+<style lang="less">
+@import '~vux/src/styles/reset.less';
+@import '~vux/src/styles/1px.less';
+@import '~vux/src/styles/tap.less';
+@import '~common/less/variable.less';
+.moneymanageitem {
+  color: #fff;
+  .item-top {
+    .item-div {
+      float: left;
+      width: 50%;
+      text-align: center;
+      .h(70);
+      .l-h(70);
+    }
+    .item-left {
+      .fs(18);
+    }
+    .item-right {
+      .fs(13);
+      .span1 {
+        display: inline-block;
+        .m-r(10);
+        color: @font-gray;
+      }
+    }
+  }
+  .item-bottom {
+    .fs(14);
+    .item-div{
+      width: 50%;
+      text-align: center;
+      float: left;
+      .h(70);
+      span {
+        display: inline-block;
+      }
+      .span1 {
+        color: @font-gray;
+      }
+      .item-div-top {
+        .h(35);
+        .l-h(35);
+        .span2 {
+          color: red;
+        }
+      }
+      .item-div-bottom {
+        .span2 {
+          color: green;
+        }
+      }
+    }
+    .item-left {
+      border-bottom: 1px solid #444;
+    }
+    .item-right {
+      position: relative;
+      border-bottom: 1px solid #444;
+      span {
+        display: block;
+        .w(70);
+        .h(35);
+        border-radius: 2px;
+        background: @bg-button;
+        position: absolute;
+        .top(15);
+        .l-h(35);
+      }
+      .cb {
+        .left(5);
+      }
+      .tb {
+        .right(30);
+      }
+    }
+
+  }
+}
+</style>

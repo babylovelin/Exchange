@@ -1,0 +1,39 @@
+<template lang="html">
+  <div class="main-money">
+      <m-header></m-header>
+      <div class="money-top">
+        <moneymanage-top></moneymanage-top>
+      </div>
+      <div class="money-detail">
+        <moneymanage-item></moneymanage-item>
+      </div>
+  </div>
+</template>
+
+<script>
+import MHeader from './m-header/m-header'
+import MoneymanageItem from './m-left/moneymanage-item'
+import MoneymanageTop from './m-left/moneymanage-top'
+export default {
+  components: {
+    MHeader,
+    MoneymanageItem,
+    MoneymanageTop
+  }
+}
+</script>
+
+<style lang="less">
+@import '~vux/src/styles/reset.less';
+@import '~vux/src/styles/1px.less';
+@import '~vux/src/styles/tap.less';
+@import '~common/less/variable.less';
+.main-money {
+  position: absolute;
+  .left(0);
+  .top(0);
+  background: #17191b;
+  height: 100vh;
+  width: 100%;
+}
+</style>
